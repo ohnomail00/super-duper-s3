@@ -1,0 +1,16 @@
+### Send file to gateway
+PUT {{gateway}}/{{bucket}}/{{fileName}}
+Content-Type: application/octet-stream
+
+< ./test_file.json
+
+### GET file from gateway
+GET {{gateway}}/{{bucket}}/{{fileName}}
+
+### Add server
+POST {{gateway}}/server
+Content-Type: application/json
+
+{
+  "addr": "http://new-storage.example.com"
+}

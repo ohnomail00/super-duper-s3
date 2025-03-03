@@ -1,0 +1,100 @@
+services:
+  storage1:
+    image: super-duper-s3-storage:build
+    container_name: storage1
+    command: "/storage-bin"
+    volumes:
+      - ${PWD}/storage/s1:/storage
+    environment:
+      - STORAGE_PATH=/storage
+      - HOST=0.0.0.0
+    ports:
+      - "8001:8000"
+    networks:
+      - super-duper-s3
+
+  storage2:
+    image: super-duper-s3-storage:build
+    container_name: storage2
+    command: "/storage-bin"
+    volumes:
+      - ${PWD}/storage/s2:/storage
+    environment:
+      - STORAGE_PATH=/storage
+      - HOST=0.0.0.0
+    ports:
+      - "8002:8000"
+    networks:
+      - super-duper-s3
+
+  storage3:
+    image: super-duper-s3-storage:build
+    container_name: storage3
+    command: "/storage-bin"
+    volumes:
+      - ${PWD}/storage/s3:/storage
+    environment:
+      - STORAGE_PATH=/storage
+      - HOST=0.0.0.0
+    ports:
+      - "8003:8000"
+    networks:
+      - super-duper-s3
+
+  storage4:
+    image: super-duper-s3-storage:build
+    container_name: storage4
+    command: "/storage-bin"
+    volumes:
+      - ${PWD}/storage/s4:/storage
+    environment:
+      - STORAGE_PATH=/storage
+      - HOST=0.0.0.0
+    ports:
+      - "8004:8000"
+    networks:
+      - super-duper-s3
+
+  storage5:
+    image: super-duper-s3-storage:build
+    container_name: storage5
+    command: "/storage-bin"
+    environment:
+      - STORAGE_PATH=/storage
+      - HOST=0.0.0.0
+    volumes:
+      - ${PWD}/storage/s5:/storage
+    ports:
+      - "8005:8000"
+    networks:
+      - super-duper-s3
+
+  storage6:
+    image: super-duper-s3-storage:build
+    container_name: storage6
+    command: "/storage-bin"
+    volumes:
+      - ${PWD}/storage/s6:/storage
+    environment:
+      - STORAGE_PATH=/storage
+      - HOST=0.0.0.0
+    ports:
+      - "8006:8000"
+    networks:
+      - super-duper-s3
+
+  gateway:
+    image: super-duper-s3-gateway:build
+    container_name: gateway
+    command: "/gateway-bin"
+    environment:
+      - STORAGE_ADDRS=http://storage1:8000,http://storage2:8000,http://storage3:8000,http://storage4:8000,http://storage5:8000,http://storage6:8000
+      - HOST=0.0.0.0
+    ports:
+      - "8000:8000"
+    networks:
+      - super-duper-s3
+
+networks:
+  super-duper-s3:
+    driver: bridge

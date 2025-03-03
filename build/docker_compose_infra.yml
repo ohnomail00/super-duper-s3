@@ -1,0 +1,94 @@
+services:
+  storage1:
+    build:
+      context: ..
+      dockerfile: build/storage.Dockerfile
+    container_name: storage1
+    volumes:
+      - ${PWD}/storage/s1:/storage
+    environment:
+      - STORAGE_PATH=/storage
+      - HOST=0.0.0.0
+    ports:
+      - "8001:8000"
+    networks:
+      - super-duper-s3
+
+  storage2:
+    build:
+      context: ..
+      dockerfile: build/storage.Dockerfile
+    container_name: storage2
+    volumes:
+      - ${PWD}/storage/s2:/storage
+    environment:
+      - STORAGE_PATH=/storage
+      - HOST=0.0.0.0
+    ports:
+      - "8002:8000"
+    networks:
+      - super-duper-s3
+
+  storage3:
+    build:
+      context: ..
+      dockerfile: build/storage.Dockerfile
+    container_name: storage3
+    volumes:
+      - ${PWD}/storage/s3:/storage
+    environment:
+      - STORAGE_PATH=/storage
+      - HOST=0.0.0.0
+    ports:
+      - "8003:8000"
+    networks:
+      - super-duper-s3
+
+  storage4:
+    build:
+      context: ..
+      dockerfile: build/storage.Dockerfile
+    container_name: storage4
+    volumes:
+      - ${PWD}/storage/s4:/storage
+    environment:
+      - STORAGE_PATH=/storage
+      - HOST=0.0.0.0
+    ports:
+      - "8004:8000"
+    networks:
+      - super-duper-s3
+
+  storage5:
+    build:
+      context: ..
+      dockerfile: build/storage.Dockerfile
+    container_name: storage5
+    environment:
+      - STORAGE_PATH=/storage
+      - HOST=0.0.0.0
+    volumes:
+      - ${PWD}/storage/s5:/storage
+    ports:
+      - "8005:8000"
+    networks:
+      - super-duper-s3
+
+  storage6:
+    build:
+      context: ..
+      dockerfile: build/storage.Dockerfile
+    container_name: storage6
+    volumes:
+      - ${PWD}/storage/s6:/storage
+    environment:
+      - STORAGE_PATH=/storage
+      - HOST=0.0.0.0
+    ports:
+      - "8006:8000"
+    networks:
+      - super-duper-s3
+
+networks:
+  super-duper-s3:
+    driver: bridge
